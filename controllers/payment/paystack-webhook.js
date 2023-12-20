@@ -12,13 +12,18 @@ const paystackWebHook = async (req, res, next) => {
       hash == req.headers["x-paystack-signature"] &&
       response === "charge.success"
     ) {
-      console.log("charge successful!")
+      return res.status(200).json({
+        success: true,
+        msg: 'Charge Successful',
+        allProducts
+
+    })
     }
     if (
         hash == req.headers["x-paystack-signature"] &&
         response === "charge.failed"
       ) {
-        console.log("charge failed!")
+        return res.status(500).json({ success: false, msg: 'No products found' });
       }
     res.sendStatus(200);
 };
