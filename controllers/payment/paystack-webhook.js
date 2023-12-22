@@ -15,8 +15,6 @@ const paystackWebHook = async (req, res, next) => {
       return res.status(200).json({
         success: true,
         msg: 'Charge Successful',
-        allProducts
-
     })
     }
     if (

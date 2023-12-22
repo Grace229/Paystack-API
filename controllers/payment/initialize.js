@@ -13,17 +13,20 @@ const getPaymentWindow = async (req, res) => {
 
     promise.then(
       (response) => {
+        console.log(response)
         let checkout_url = response.data.authorization_url;
+        let reference = response.data.reference;
         return res.status(201).json({
           success: true,
           msg: "payment initialize successfully",
           checkout_url,
+          reference
         });
       },
       (error) => console.log(`Error: ${error.message.response}`)
     );
   } catch (err) {
-    return res.status(500).json({ msg: err.message.data });
+    return res.status(500).json({ msg: "Failed to initialize payment" });
   }
 };
 module.exports = getPaymentWindow;
